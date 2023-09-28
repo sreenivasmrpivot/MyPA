@@ -163,7 +163,7 @@ cython_debug/
 Miniconda*
 
 # data
-data/
+# data/
 
 # vector store
 faiss/
