@@ -9,7 +9,7 @@ You are a helpful, respectful and honest assistant. Always answer as helpfully a
 <</SYS>>
 """
 
-query_wrapper_prompt = SimpleInputPrompt("[INST]{prompt}[/INST]")
+query_wrapper_prompt = SimpleInputPrompt("[INST]{query_str}[/INST]")
 
 def load(local: bool = True):
     embed_model = HuggingFaceEmbedding(model_name="sentence-transformers/all-MiniLM-L6-v2")
@@ -36,7 +36,7 @@ def load(local: bool = True):
         )
         service_context = ServiceContext.from_defaults(llm=llm, embed_model=embed_model, chunk_size=1024, chunk_overlap=128)
 
-    document = SimpleDirectoryReader(input_files=["data/Business Conduct.pdf"]).load_data()
+    document = SimpleDirectoryReader(input_files=["data/2306.06624.pdf"]).load_data()
     index = VectorStoreIndex.from_documents(document, service_context=service_context) # this is just in memory
     index.storage_context.persist(persist_dir="./llama-index/storage") # this enables storing vector store on disk
 
@@ -44,8 +44,8 @@ def load(local: bool = True):
     index = load_index_from_storage(storage_context=storage_context, service_context=service_context) # this loads the index from disk
     query_engine = index.as_query_engine()
     # query_chat_bot = index.as_chat_bot() // this gives memory capabilties to the chat bot
-    response = query_engine.query("what is Legal Holds?")
+    response = query_engine.query("which university is involved in the research?")
     print(response)
 
 if __name__ == '__main__':
-    load()
+    load(False)
