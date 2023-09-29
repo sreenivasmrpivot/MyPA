@@ -46,6 +46,6 @@ if __name__ == '__main__':
     # ask the AI chat about information in our local files
     model = load_llm()
     # prompt = "what is the meaning of sampajanna?"
-    prompt = "How can I do my part to keep our information safe?"
+    prompt = "what is Legal Holds?"
     output = model({'query': prompt})
     print(output["result"])

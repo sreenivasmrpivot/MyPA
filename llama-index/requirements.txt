@@ -3,5 +3,4 @@ pypdf
 openai
 transformers
 accelerate
-IPython
 llama-cpp-python
